@@ -1,4 +1,4 @@
-import SearchBar from "../components/SearchBar.jsx";
+import Navigation from "../components/Navigation";
 
 function Home() {
   return (
@@ -6,7 +6,7 @@ function Home() {
       <div className="mx-auto w-full max-w-2xl px-6 py-10">
         <h1 className="text-center text-2xl font-bold">TODO LIST</h1>
 
-        <SearchBar />
+        <Navigation />
       </div>
     </>
   );
