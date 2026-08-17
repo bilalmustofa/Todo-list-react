@@ -1,4 +1,4 @@
-import { FiSearch, FiMoon, FiChevronDown } from "react-icons/fi";
+import { FiSearch, FiMoon, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useState } from 'react';
 
 function Navigation() {
@@ -12,20 +12,28 @@ function Navigation() {
         <div className="relative flex-1">
           <input type="text" placeholder="Search note..." 
                 className="w-full rounded-sm border border-[#6C63FF] px-4 py-1 text-sm outline-none"/>
-          <FiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6C63FF]"/>
+          <FiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6C63FF] cursor-pointer"/>
         </div>
 
         {/*filter*/}
         <div className="relative">
-          <button className="flex items-center gap-2 rounded-sm bg-[#6C63FF] px-3 py-1 text-sm font-medium text-white"
+          <button className="flex items-center justify-around gap-4 rounded-sm bg-[#6C63FF] px-4 py-1 text-sm font-medium text-white cursor-pointer"
                   onClick={() => setIsOpen(!isOpen)}>
             ALL
-            <FiChevronDown size={16} />
+            {isOpen ? <FiChevronUp size={16} /> : <FiChevronDown size={16}/>}
           </button>
+
+          {isOpen && (
+            <div className="absolute flex flex-col gap-1 text-sm font-medium bg-white text-[#6C63FF] border border-[#6C63FF] rounded-md py-1">
+              <button className="text-left w-full hover:bg-[#d6d5fa] px-2 cursor-pointer">ALL</button>
+              <button className="text-left w-full hover:bg-[#d6d5fa] px-2 cursor-pointer">Complete</button>
+              <button className="text-left w-full hover:bg-[#d6d5fa] px-2 cursor-pointer">Incomplete</button>
+            </div>
+          )}
         </div>
 
         {/* Dark mode */}
-        <button className="rounded-sm bg-[#6C63FF] p-1 text-white">
+        <button className="rounded-sm bg-[#6C63FF] p-1 text-white cursor-pointer">
           <FiMoon size={20} />
         </button>
       </div>
