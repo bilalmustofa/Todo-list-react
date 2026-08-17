@@ -1,4 +1,5 @@
 import Navigation from "../components/Navigation";
+import ToDoButton from "../components/ToDoButton";
 import ToDoItem from "../components/ToDoItem";
 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
           <ToDoItem />
           <ToDoItem />
         </div>
+        <ToDoButton />
       </div>
     </>
   );
