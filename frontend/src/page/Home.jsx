@@ -1,4 +1,5 @@
 import Navigation from "../components/Navigation";
+import ToDoItem from "../components/ToDoItem";
 
 function Home() {
   return (
@@ -7,6 +8,7 @@ function Home() {
         <h1 className="text-center text-2xl font-bold">TODO LIST</h1>
 
         <Navigation />
+        <ToDoItem />
       </div>
     </>
   );
