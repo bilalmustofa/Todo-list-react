@@ -1,9 +1,14 @@
+import { useState } from "react";
+
 import AddNote from "../components/AddNote";
 import Navigation from "../components/Navigation";
 import ToDoButton from "../components/ToDoButton";
 import ToDoItem from "../components/ToDoItem";
 
 function Home() {
+
+  const [isAddNoteOpen, setAddNoteOpen] = useState(false);
+
   return (
     <>
       <div className="mx-auto w-full max-w-2xl px-6 py-10">
@@ -17,9 +22,9 @@ function Home() {
           <ToDoItem />
         </div>
 
-        <ToDoButton />
+        <ToDoButton onClick={() => setAddNoteOpen(true)}/>
 
-        <AddNote />
+        <AddNote isOpen={isAddNoteOpen} onCancel={() => setAddNoteOpen(false)}/>
       </div>
     </>
   );
