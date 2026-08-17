@@ -1,3 +1,4 @@
+import AddNote from "../components/AddNote";
 import Navigation from "../components/Navigation";
 import ToDoButton from "../components/ToDoButton";
 import ToDoItem from "../components/ToDoItem";
@@ -9,12 +10,16 @@ function Home() {
         <h1 className="text-center text-2xl font-bold">TODO LIST</h1>
 
         <Navigation />
+
         <div className="mt-8">
           <ToDoItem />
           <ToDoItem />
           <ToDoItem />
         </div>
+
         <ToDoButton />
+
+        <AddNote />
       </div>
     </>
   );
