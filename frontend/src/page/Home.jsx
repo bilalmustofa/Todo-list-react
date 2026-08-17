@@ -8,7 +8,11 @@ function Home() {
         <h1 className="text-center text-2xl font-bold">TODO LIST</h1>
 
         <Navigation />
-        <ToDoItem />
+        <div className="mt-8">
+          <ToDoItem />
+          <ToDoItem />
+          <ToDoItem />
+        </div>
       </div>
     </>
   );
