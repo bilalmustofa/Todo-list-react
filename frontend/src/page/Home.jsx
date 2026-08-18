@@ -9,6 +9,17 @@ function Home() {
 
   const [isAddNoteOpen, setAddNoteOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (title) => {
+    const newTodo = {
+      id: Date.now(),
+      title: title,
+      completed: false
+    }
+    setTodos((prevTodos) => [...prevTodos, newTodo]);
+    setAddNoteOpen(false);
+  }
 
   return (
     <>
@@ -19,14 +30,14 @@ function Home() {
         <Navigation darkMode={darkMode} setDarkMode={setDarkMode}/>
 
         <div className="mt-8">
-          <ToDoItem />
-          <ToDoItem />
-          <ToDoItem />
+          {todos.map((todo) => (
+            <ToDoItem key={todo.id} title={todo.title} />
+          ))}
         </div>
 
         <ToDoButton onClick={() => setAddNoteOpen(true)}/>
 
-        <AddNote isOpen={isAddNoteOpen} onCancel={() => setAddNoteOpen(false)} darkMode={darkMode}/>
+        <AddNote isOpen={isAddNoteOpen} onCancel={() => setAddNoteOpen(false)} darkMode={darkMode} onApply={addTodo}/>
       </div>
     </main>
     </>
