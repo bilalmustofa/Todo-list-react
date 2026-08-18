@@ -10,8 +10,8 @@ function ToDoItem() {
                 <p>Learn React</p>
             </div>
             <div className="flex items-center justify-center gap-4 cursor-pointer">
-                <FiTrash2 />
-                <VscEdit />
+                <FiTrash2 className="hover:text-[red]"/>
+                <VscEdit className="hover:text-[blue]"/>
             </div>
         </div>
     </>
