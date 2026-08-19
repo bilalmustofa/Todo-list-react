@@ -11,6 +11,7 @@ function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [todos, setTodos] = useState([]);
 
+  // add new note(Todo)
   const addTodo = (title) => {
     const newTodo = {
       id: Date.now(),
@@ -19,6 +20,15 @@ function Home() {
     }
     setTodos((prevTodos) => [...prevTodos, newTodo]);
     setAddNoteOpen(false);
+  }
+
+  //  completed todo
+  const toggleTodo = (id) => {
+    setTodos((prevTodos) => 
+      prevTodos.map((todo) => 
+        todo.id === id ? { ...todo, completed: !todo.completed} : todo
+      )
+    )
   }
 
   return (
@@ -31,7 +41,7 @@ function Home() {
 
         <div className="mt-8">
           {todos.map((todo) => (
-            <ToDoItem key={todo.id} title={todo.title} />
+            <ToDoItem key={todo.id} title={todo.title} completed={todo.completed} onToggle={() => toggleTodo(todo.id)}/>
           ))}
         </div>
 

@@ -21,7 +21,7 @@ function Navigation({ setDarkMode, darkMode }) {
         <div className="relative">
           <button
             className="flex items-center justify-around gap-4 rounded-sm bg-[#6C63FF] px-4 py-1 text-sm font-medium text-white cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsOpen((prev) => !prev)}
           >
             ALL
             {isOpen ? <FiChevronUp size={16} /> : <FiChevronDown size={16} />}
