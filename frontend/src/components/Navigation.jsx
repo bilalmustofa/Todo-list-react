@@ -1,7 +1,7 @@
 import { FiSearch, FiMoon, FiChevronDown, FiChevronUp, FiSun } from "react-icons/fi";
 import { useState } from "react";
 
-function Navigation({ setDarkMode, darkMode }) {
+function Navigation({ setDarkMode, darkMode, search, setSearch }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -11,6 +11,8 @@ function Navigation({ setDarkMode, darkMode }) {
         <div className="relative flex-1">
           <input
             type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search note..."
             className={`w-full rounded-sm border border-[#6C63FF] px-4 py-1 text-sm outline-none ${darkMode ? "placeholder-white" : "placeholder-black"}`}
           />

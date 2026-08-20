@@ -11,6 +11,7 @@ function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [todos, setTodos] = useState([]);
   const [editingTodo, setEditingTodo] = useState(null);
+  const [search, setSearch] = useState('')
 
   // add new note(Todo)
   const addTodo = (title) => {
@@ -52,6 +53,11 @@ function Home() {
     setAddNoteOpen(true)
   }
 
+  // search
+  const filterTodo = todos.filter((todo) => 
+    todo.title.toLowerCase().includes(search.toLowerCase())
+  )
+
   return (
     <>
       <main
@@ -60,12 +66,16 @@ function Home() {
         <div className="mx-auto w-full max-w-2xl px-6 py-10">
           <h1 className="text-center text-2xl font-bold">TODO LIST</h1>
 
-          <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Navigation 
+            darkMode={darkMode} 
+            setDarkMode={setDarkMode}
+            search={search}
+            setSearch={setSearch} />
 
           <div className="mt-8">
-            {todos.length === 0 ? ( <EmptyTodo />) : (
-
-            todos.map((todo) => (
+            {filterTodo.length === 0 ? ( <EmptyTodo />) : 
+            (
+            filterTodo.map((todo) => (
               <ToDoItem
                 key={todo.id}
                 title={todo.title}
