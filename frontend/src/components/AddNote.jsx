@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-function AddNote({ isOpen, onCancel, darkMode, onApply }) {
+function AddNote({ isOpen, onCancel, darkMode, onApply, editingTodo, onEdit }) {
 
-  const [note, setNote] = useState("");
+  const [note, setNote] = useState(editingTodo ? editingTodo.title : "");
 
   if (!isOpen) {
     return null;
@@ -12,8 +12,15 @@ function AddNote({ isOpen, onCancel, darkMode, onApply }) {
     if (note.trim() === "") {
       return;
     }
-    onApply(note);
+
+    if (editingTodo) {
+      onEdit(editingTodo.id, note);
+    } else {
+      onApply(note);
+    }
+
     setNote("");
+    onCancel();
   };
 
   return (
@@ -22,7 +29,9 @@ function AddNote({ isOpen, onCancel, darkMode, onApply }) {
         <div
           className={`w-full max-w-md rounded-lg p-6 ${darkMode ? "bg-[#252525] text-white" : "bg-white text-black"}`}
         >
-          <h1 className="text-xl font-black text-center">NEW NOTE</h1>
+          <h1 className="text-xl font-black text-center">
+            {editingTodo ? "EDIT NOTE" : "NEW NOTE"}
+          </h1>
 
           <input
             type="text"
@@ -34,7 +43,7 @@ function AddNote({ isOpen, onCancel, darkMode, onApply }) {
 
           <div className="mt-5 flex flex-col-reverse gap-3 sm:mt-10 sm:flex-row sm:justify-between">
             <button
-              className={`w-full sm:w-auto bg-[#6C63FF]  px-2 py-1 rounded-sm cursor-pointer ${darkMode ? "bg-transparent text-[#6C63FF] border" : "bg-[#6C63FF] text-white"}`}
+              className={`w-full sm:w-auto bg-[#6C63FF] px-2 py-1 rounded-sm cursor-pointer ${darkMode ? "bg-transparent text-[#6C63FF] border" : "bg-[#6C63FF] text-white"}`}
               onClick={onCancel}
             >
               Cancel
@@ -43,7 +52,7 @@ function AddNote({ isOpen, onCancel, darkMode, onApply }) {
               className="w-full sm:w-auto bg-[#6C63FF] text-white px-2 py-1 rounded-sm cursor-pointer"
               onClick={handleApply}
             >
-              Apply
+              {editingTodo ? "Edit" : "Apply"}
             </button>
           </div>
         </div>

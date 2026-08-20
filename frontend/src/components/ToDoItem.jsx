@@ -1,7 +1,7 @@
 import { FiTrash2 } from "react-icons/fi";
 import { VscEdit } from "react-icons/vsc";
 
-function ToDoItem({ title, completed, onToggle, onDelete }) {
+function ToDoItem({ title, completed, onToggle, onDelete, onEdit }) {
   return (
     <>
         <div className="flex items-center justify-between border-b border-b-[#6C63FF] py-4 mx-10">
@@ -11,7 +11,7 @@ function ToDoItem({ title, completed, onToggle, onDelete }) {
             </div>
             <div className="flex items-center justify-center gap-4 cursor-pointer">
                 <FiTrash2 className="hover:text-[red]" onClick={onDelete}/>
-                <VscEdit className="hover:text-[blue]"/>
+                <VscEdit className="hover:text-[blue]" onClick={onEdit}/>
             </div>
         </div>
     </>

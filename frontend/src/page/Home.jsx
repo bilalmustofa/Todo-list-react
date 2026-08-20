@@ -1,14 +1,16 @@
 import { useState } from "react";
 
-import AddNote from "../components/AddNote";
-import Navigation from "../components/Navigation";
-import ToDoButton from "../components/ToDoButton";
-import ToDoItem from "../components/ToDoItem";
+import AddNote from "../components/AddNote.jsx";
+import Navigation from "../components/Navigation.jsx";
+import ToDoButton from "../components/ToDoButton.jsx";
+import ToDoItem from "../components/ToDoItem.jsx";
+import EmptyTodo from "../components/EmptyTodo.jsx";
 
 function Home() {
   const [isAddNoteOpen, setAddNoteOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [todos, setTodos] = useState([]);
+  const [editingTodo, setEditingTodo] = useState(null);
 
   // add new note(Todo)
   const addTodo = (title) => {
@@ -35,6 +37,21 @@ function Home() {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
+  //edit Todo
+  const editTodo = (id, newTitle) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, title: newTitle } : todo,
+      ),
+    );
+  };
+
+  // open edit
+  const openEditTodo = (todo) => {
+    setEditingTodo(todo)
+    setAddNoteOpen(true)
+  }
+
   return (
     <>
       <main
@@ -46,24 +63,37 @@ function Home() {
           <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
 
           <div className="mt-8">
-            {todos.map((todo) => (
+            {todos.length === 0 ? ( <EmptyTodo />) : (
+
+            todos.map((todo) => (
               <ToDoItem
                 key={todo.id}
                 title={todo.title}
                 completed={todo.completed}
                 onToggle={() => toggleTodo(todo.id)}
                 onDelete={() => deleteTodo(todo.id)}
+                onEdit={() => openEditTodo(todo)}
               />
-            ))}
+            ))
+            )}
           </div>
 
-          <ToDoButton onClick={() => setAddNoteOpen(true)} />
+          <ToDoButton onClick={() => {
+            setEditingTodo(null);
+            setAddNoteOpen(true)}
+          } />
 
           <AddNote
+            key={editingTodo ? editingTodo.id : "new-note"}
             isOpen={isAddNoteOpen}
-            onCancel={() => setAddNoteOpen(false)}
+            onCancel={() => {
+              setAddNoteOpen(false)
+              setEditingTodo(null)
+            }}
             darkMode={darkMode}
             onApply={addTodo}
+            editingTodo={editingTodo}
+            onEdit={editTodo}
           />
         </div>
       </main>
