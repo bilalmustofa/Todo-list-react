@@ -1,8 +1,15 @@
 import { FiSearch, FiMoon, FiChevronDown, FiChevronUp, FiSun } from "react-icons/fi";
 import { useState } from "react";
 
-function Navigation({ setDarkMode, darkMode, search, setSearch }) {
+function Navigation({ setDarkMode, darkMode, search, setSearch, filter, setFilter }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const filterLabel =
+  filter === "all"
+    ? "ALL"
+    : filter === "complete"
+    ? "COMPLETE"
+    : "INCOMPLETE";
 
   return (
     <>
@@ -25,19 +32,19 @@ function Navigation({ setDarkMode, darkMode, search, setSearch }) {
             className="flex items-center justify-around gap-4 rounded-sm bg-[#6C63FF] px-4 py-1 text-sm font-medium text-white cursor-pointer"
             onClick={() => setIsOpen((prev) => !prev)}
           >
-            ALL
+            {filterLabel}
             {isOpen ? <FiChevronUp size={16} /> : <FiChevronDown size={16} />}
           </button>
 
           {isOpen && (
             <div className="absolute flex flex-col gap-1 text-sm font-medium bg-white text-[#6C63FF] border border-[#6C63FF] rounded-md py-1">
-              <button className="text-left w-full hover:bg-[#d6d5fa] px-2 cursor-pointer">
+              <button className="text-left w-full hover:bg-[#d6d5fa] px-2 cursor-pointer" onClick={() => setFilter("all")}>
                 ALL
               </button>
-              <button className="text-left w-full hover:bg-[#d6d5fa] px-2 cursor-pointer">
+              <button className="text-left w-full hover:bg-[#d6d5fa] px-2 cursor-pointer" onClick={() => setFilter("complete")}>
                 Complete
               </button>
-              <button className="text-left w-full hover:bg-[#d6d5fa] px-2 cursor-pointer">
+              <button className="text-left w-full hover:bg-[#d6d5fa] px-2 cursor-pointer" onClick={() => setFilter("incomplete")}>
                 Incomplete
               </button>
             </div>

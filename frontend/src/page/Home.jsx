@@ -11,7 +11,8 @@ function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [todos, setTodos] = useState([]);
   const [editingTodo, setEditingTodo] = useState(null);
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState("all");
 
   // add new note(Todo)
   const addTodo = (title) => {
@@ -53,9 +54,12 @@ function Home() {
     setAddNoteOpen(true)
   }
 
-  // search
-  const filterTodo = todos.filter((todo) => 
-    todo.title.toLowerCase().includes(search.toLowerCase())
+  // search and filter
+  const filterTodo = todos.filter((todo) => {
+    const matchesSearch = todo.title.toLowerCase().includes(search.toLowerCase())
+    const matchesFilter = filter === "all" || (filter === "complete" && todo.completed) || (filter === "incomplete" && !todo.completed)
+    return matchesSearch && matchesFilter;
+  }
   )
 
   return (
@@ -70,7 +74,9 @@ function Home() {
             darkMode={darkMode} 
             setDarkMode={setDarkMode}
             search={search}
-            setSearch={setSearch} />
+            setSearch={setSearch}
+            filter={filter} 
+            setFilter={setFilter}/>
 
           <div className="mt-8">
             {filterTodo.length === 0 ? ( <EmptyTodo />) : 
